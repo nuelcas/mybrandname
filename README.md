@@ -47,16 +47,25 @@ MyBrandName is an AI-powered platform that helps startups create a complete bran
 - OpenAI API key (for AI-powered logo and content generation)
 - Stripe account (for subscription and payment handling)
 
+---
+
 ### Installations
 
 **Clone the repository**
 ```bash
 git clone https://github.com/<your username>/mybrandname.git
-Install Dependencies
+```
+---
 
+### Install Dependencies
+
+```bash
 cd backend && npm install
 cd ../frontend && npm install
-Environment setup
+```
+---
+
+### Environment setup
 
 cp backend/.env.example backend/.env
 Update .env with your configuration:
@@ -69,8 +78,12 @@ Stripe API key
 
 Development
 
+---
+
 # Run backend
 cd backend && npm run dev
+
+---
 
 # Run frontend
 cd frontend && npm run dev
@@ -105,71 +118,112 @@ Repository Structure
 │   └── package.json           # Lists backend project dependencies, scripts, and metadata for Node.js
 │
 └── README.md
-Architecture Overview
-Frontend
-Built with TypeScript + Vite + Tailwind CSS
 
-Connects to Supabase for authentication, backend API for AI generation, and Stripe for payments
+---
 
-Backend
-Built with Node.js + Express
+### Architecture Overview
 
-Handles authentication, AI content generation, and database writes via Supabase
+#### Frontend 
 
-Supabase Tables
-Table	Purpose
-users	Stores user accounts
-brands	Saves generated brand info
-assets	Links to stored images/files
-subscriptions	Tracks plan and payment status
+- Built with TypeScript + Vite + Tailwind CSS
 
-Example API Endpoints
-Auth Routes
-Endpoint	Method	Description
-/api/auth/signup	POST	Register new user
-/api/auth/login	POST	Log in user
+- Connects to Supabase for authentication, backend API for AI generation, and Stripe for payments
 
-Branding Routes
-Endpoint	Method	Description
-/api/brand/logo	POST	Generate AI-powered logo
+---
 
-Example Request:
+#### Backend
 
+- Built with Node.js + Express
+
+- Handles authentication, AI content generation, and database writes via Supabase
+
+---
+
+### Supabase Tables
+
+| Table    | Purpose |
+| -------- | ------- |
+| users  | Stores user accounts|
+| brands | Saves generated brand info|
+| assets    | Links to stored images/files|
+| subscriptions | Tracks plan and payment status| 
+
+---
+
+### Example API Endpoints
+
+#### Auth Routes
+
+| Endpoint	| Method | Description |
+| ----------| ------- | ------------|
+| /api/auth/signup | POST | Register new user |
+| /api/auth/login | POST | Log in user |
+
+#### Branding Routes
+
+| Endpoint	| Method | Description |
+| ----------| ------- | ------------|
+| /api/brand/logo | POST | Generate AI-powered logo |		
+
+#### Example Request:
+
+```bash
 POST /api/brand/logo
 {
   "brandName": "NovaTech",
   "industry": "Tech",
   "style": "Modern Minimal"
 }
-Example Response:
+```
 
+#### Example Response:
+
+```bash
 {
   "logoUrl": "https://supabase.storage/novatech-logo.png",
   "palette": ["#121212", "#FF005C"]
 }
-Authentication (Supabase)
+```
+---
 
+### Authentication (Supabase)
+
+```javascript
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_KEY
 );
-Environment Variables
-Variable	Description
-VITE_SUPABASE_URL	Supabase project URL
-OPENAI_API_KEY	API key for AI generation
-PORT	Backend port (default: 5000)
+```
+---
 
-Testing
+### Environment Variables
+
+| Variable    | Description |
+| -------- | ------- |
+| VITE_SUPABASE_URL  | Supabase project URL|
+| OPENAI_API_KEY  | API key for AI generation|
+| PORT  | Backend port (default: 5000)|
+
+---
+
+### Testing
+
 Use Vitest/Jest for unit testing and Supertest for API routes.
 
+```bash
 npm run test
-Continuous Integration (CI)
+```
+
+---
+
+### Continuous Integration (CI)
 CI automatically runs tests when you push new code. This ensures your main branch always stays stable.
 
 Example GitHub Action Workflow:
 
+```bash
 name: MyBrandName CI
 on: [push, pull_request]
 jobs:
@@ -180,79 +234,110 @@ jobs:
       - run: |
           cd backend && npm ci && npm run test
           cd ../frontend && npm ci && npm run build
-Tip: CI helps avoid “it works on my machine” problems.
+```
 
-Versioning & Changelog
+**Tip:** CI helps avoid “it works on my machine” problems.
+
+---
+
+### Versioning & Changelog
 Keep a CHANGELOG.md file documenting updates.
 
 Use Semantic Versioning (MAJOR.MINOR.PATCH):
 
 Example:
-
 1.1.0 → Added new features.
-Contributing
+
+---
+
+### Contributing
 We welcome contributions from developers who want to improve MyBrandName!
+
 Follow these steps to contribute effectively:
 
-Fork the Repository
+#### Fork the Repository
 Click the Fork button on GitHub to create your copy.
 
-Clone Your Fork
+#### Clone Your Fork
 
+```bash
 git clone https://github.com/<your-username>/mybrandname.git
-Create a Feature Branch
+```
 
+#### Create a Feature Branch
+
+```bash
 git checkout -b feat/your-feature-name
-Set Up the Environment
+```
+
+#### Set Up the Environment
 Follow setup instructions in README.
 
-Follow Code Style
+#### Follow Code Style
 
+```bash
 npm run lint
-Use Clear Commit Messages
-feat: – new feature
+```
 
-fix: – bug fix
+#### Use Clear Commit Messages
 
-docs: – documentation update
+`feat`: new feature
 
-refactor: – code restructuring
+`fix`: bug fix
 
-Write or Update Tests
+`docs`: documentation update
 
+`refactor`: code restructuring
+
+#### Write or Update Tests
+
+```bash
 npm run test
-Submit a Pull Request (PR)
+```
+
+#### Submit a Pull Request (PR)
 Include:
 
-Description of changes
+- Description of changes
 
-Issue references (e.g., Closes #12)
+- Issue references (for example, Closes #12)
 
-Screenshots or examples if applicable
+- Screenshots or examples if applicable
 
-Participate in Code Review
+#### Participate in Code Review
 Be collaborative and responsive.
 
-Code of Conduct
-Be respectful, kind, and patient
+---
 
-Welcome feedback constructively
+### Code of Conduct
 
-Avoid offensive or discriminatory language
+- Be respectful, kind, and patient
 
-Focus on collaboration
+- Welcome feedback constructively
 
-Credit contributors appropriately
+- Avoid offensive or discriminatory language
 
-Report concerns privately
+- Focus on collaboration
+
+- Credit contributors appropriately
+
+- Report concerns privately
 
 Let’s work together to make MyBrandName a project where everyone feels valued and supported. 💙
 
-Deployment
-Component	Platform	Notes
-Frontend	Vercel/Netlify	Add env variables
-Backend	Render/Railway	Add Supabase & AI keys
-Database	Supabase	Auth + Storage + Database
+---
 
-License
+### Deployment
+
+| Component	| Platform | Notes |
+| ----------| ------- | ------------|
+| Frontend | Vercel/Netlify | Add env variables |
+| Backend | Render/Railway | Add Supabase & AI keys |
+| Database | Supabase | Auth + Storage + Database |
+		
+---
+
+### License
 This project is licensed under the MIT License — see the LICENSE file for details.
+
+---

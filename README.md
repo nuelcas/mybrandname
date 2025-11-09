@@ -51,7 +51,7 @@ MyBrandName is an AI-powered platform that helps startups create a complete bran
 
 **Clone the repository**
 ```bash
-git clone https://github.com/<your username>/mybrandname.git
+git clone https://github.com/nuelcas/mybrandname.git
 Install Dependencies
 
 cd backend && npm install

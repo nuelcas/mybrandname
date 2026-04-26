@@ -52,36 +52,39 @@ MyBrandName is an AI-powered platform that helps startups create a complete bran
 **Clone the repository**
 ```bash
 git clone https://github.com/nuelcas/mybrandname.git
-Install Dependencies
-
+```
+**Install Dependencies**
+```bash
 cd backend && npm install
 cd ../frontend && npm install
-Environment setup
-
+```
+**Environment setup**
+```bash
 cp backend/.env.example backend/.env
-Update .env with your configuration:
+```
+**Update .env with your configuration:**
 
-Supabase URL and API key
+- Supabase URL and API key
+- OpenAI API key
+- Stripe API key
 
-OpenAI API key
-
-Stripe API key
-
-Development
-
+**Development**
+```bash
 # Run backend
 cd backend && npm run dev
 
 # Run frontend
 cd frontend && npm run dev
-Production Build
-
+```
+**Production Build**
+```bash
 npm run build
 npm start
+```
 Visit: http://localhost:5173
 
-Repository Structure
-
+## Repository Structure
+```bash
 /mybrandname
 ├── /frontend
 │   ├── /src
@@ -105,71 +108,92 @@ Repository Structure
 │   └── package.json           # Lists backend project dependencies, scripts, and metadata for Node.js
 │
 └── README.md
-Architecture Overview
-Frontend
-Built with TypeScript + Vite + Tailwind CSS
+```
+## Architecture Overview
+**Frontend**
+- Built with TypeScript + Vite + Tailwind CSS
+- Connects to Supabase for authentication, backend API for AI generation, and Stripe for payments
 
-Connects to Supabase for authentication, backend API for AI generation, and Stripe for payments
+**Backend**
+- Built with Node.js + Express
+- Handles authentication, AI content generation, and database writes via Supabase
 
-Backend
-Built with Node.js + Express
+### Supabase Tables
 
-Handles authentication, AI content generation, and database writes via Supabase
+| Table | Purpose |
+|---|---|
+| users | Stores user accounts |
+| brands | Saves generated brand info |
+| assets | Links to stored images/files |
+| subscriptions | Tracks plan and payment status |
 
-Supabase Tables
-Table	Purpose
-users	Stores user accounts
-brands	Saves generated brand info
-assets	Links to stored images/files
-subscriptions	Tracks plan and payment status
 
-Example API Endpoints
-Auth Routes
-Endpoint	Method	Description
-/api/auth/signup	POST	Register new user
-/api/auth/login	POST	Log in user
+## Example API Endpoints
 
-Branding Routes
-Endpoint	Method	Description
-/api/brand/logo	POST	Generate AI-powered logo
+### Auth Routes
 
-Example Request:
+| Endpoint | Method | Description |
+|---|---|---|
+| /api/auth/signup | POST | Register new user |
+| /api/auth/login | POST | Log in user |
 
+### Branding Routes
+
+| Endpoint | Method | Description |
+|---|---|---|
+| /api/brand/logo | POST | Generate AI-powered logo |
+
+**Example Request:**
+```json
 POST /api/brand/logo
 {
   "brandName": "NovaTech",
   "industry": "Tech",
   "style": "Modern Minimal"
 }
-Example Response:
-
+```
+**Example Response:**
+```json
 {
   "logoUrl": "https://supabase.storage/novatech-logo.png",
   "palette": ["#121212", "#FF005C"]
 }
-Authentication (Supabase)
-
+```
+## Authentication (Supabase)
+```typescript
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_KEY
 );
-Environment Variables
-Variable	Description
-VITE_SUPABASE_URL	Supabase project URL
-OPENAI_API_KEY	API key for AI generation
-PORT	Backend port (default: 5000)
+```
 
-Testing
+
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `OPENAI_API_KEY` | API key for AI generation |
+| `PORT` | Backend port (default: 5000) |
+
+
+## Testing
+
 Use Vitest/Jest for unit testing and Supertest for API routes.
 
+```bash
 npm run test
-Continuous Integration (CI)
+```
+
+
+## Continuous Integration (CI)
+
 CI automatically runs tests when you push new code. This ensures your main branch always stays stable.
 
-Example GitHub Action Workflow:
-
+**Example GitHub Action Workflow:**
+```yaml
 name: MyBrandName CI
 on: [push, pull_request]
 jobs:
@@ -180,79 +204,77 @@ jobs:
       - run: |
           cd backend && npm ci && npm run test
           cd ../frontend && npm ci && npm run build
-Tip: CI helps avoid “it works on my machine” problems.
+```
+*Tip: CI helps avoid “it works on my machine” problems.*
 
-Versioning & Changelog
-Keep a CHANGELOG.md file documenting updates.
 
-Use Semantic Versioning (MAJOR.MINOR.PATCH):
+## Versioning & Changelog
 
-Example:
+Keep a `CHANGELOG.md` file documenting updates.
 
-1.1.0 → Added new features.
-Contributing
+Use Semantic Versioning (`MAJOR.MINOR.PATCH`):
+- **Example:** `1.1.0` → Added new features.
+
+
+## Contributing
+
 We welcome contributions from developers who want to improve MyBrandName!
 Follow these steps to contribute effectively:
 
-Fork the Repository
-Click the Fork button on GitHub to create your copy.
+1. **Fork the Repository:** Click the Fork button on GitHub to create your copy.
+2. **Clone Your Fork:**
+   ```bash
+   git clone [https://github.com/](https://github.com/)<your-username>/mybrandname.git
+   ```
+3. **Create a Feature Branch:**
+   ```bash
+   git checkout -b feat/your-feature-name
+   ```
+4. **Set Up the Environment:** Follow setup instructions in the README.
+5. **Follow Code Style:**
+   ```bash
+   npm run lint
+   ```
+6. **Use Clear Commit Messages:**
+   - `feat:` – new feature
+   - `fix:` – bug fix
+   - `docs:` – documentation update
+   - `refactor:` – code restructuring
+7. **Write or Update Tests:**
+   ```bash
+   npm run test
+   ```
+8. **Submit a Pull Request (PR):**
+   Include:
+   - Description of changes
+   - Issue references (e.g., Closes #12)
+   - Screenshots or examples if applicable
+9. **Participate in Code Review:** Be collaborative and responsive.
 
-Clone Your Fork
 
-git clone https://github.com/<your-username>/mybrandname.git
-Create a Feature Branch
 
-git checkout -b feat/your-feature-name
-Set Up the Environment
-Follow setup instructions in README.
+## Code of Conduct
 
-Follow Code Style
-
-npm run lint
-Use Clear Commit Messages
-feat: – new feature
-
-fix: – bug fix
-
-docs: – documentation update
-
-refactor: – code restructuring
-
-Write or Update Tests
-
-npm run test
-Submit a Pull Request (PR)
-Include:
-
-Description of changes
-
-Issue references (e.g., Closes #12)
-
-Screenshots or examples if applicable
-
-Participate in Code Review
-Be collaborative and responsive.
-
-Code of Conduct
-Be respectful, kind, and patient
-
-Welcome feedback constructively
-
-Avoid offensive or discriminatory language
-
-Focus on collaboration
-
-Credit contributors appropriately
-
-Report concerns privately
+- Be respectful, kind, and patient
+- Welcome feedback constructively
+- Avoid offensive or discriminatory language
+- Focus on collaboration
+- Credit contributors appropriately
+- Report concerns privately
 
 Let’s work together to make MyBrandName a project where everyone feels valued and supported. 💙
 
-Deployment
-Component	Platform	Notes
-Frontend	Vercel/Netlify	Add env variables
-Backend	Render/Railway	Add Supabase & AI keys
-Database	Supabase	Auth + Storage + Database
 
-License
+
+## Deployment
+
+| Component | Platform | Notes |
+|---|---|---|
+| Frontend | Vercel/Netlify | Add env variables |
+| Backend | Render/Railway | Add Supabase & AI keys |
+| Database | Supabase | Auth + Storage + Database |
+
+
+## License
+
 This project is licensed under the MIT License — see the LICENSE file for details.
